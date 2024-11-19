@@ -1,15 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
         </encoder>
     </appender>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%green(%d{yyyy-MM-dd HH:mm:ss.SSS}) %magenta([%thread]) %highlight(%5level) %cyan(%logger) - %yellow(%msg%n)</pattern>
         </encoder>
     </appender>
-    <root level="DEBUG">
+
+    <appender name="CONSOLE-infolog" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d %5p %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger -->
+    <logger name="com.mysite.sbb" level="DEBUG" appender-ref="CONSOLE" />
+    <logger name="jdbc.sqlonly" level="INFO" appender-ref="CONSOLE-infolog" />
+    <logger name="jdbc.resultsettable" level="INFO" appender-ref="CONSOLE-infolog" />
+
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
 </configuration>
