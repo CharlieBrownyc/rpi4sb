@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
     
     @RequestMapping("/")
-    @ResponseBody
     public String root(){
         // Redirect to the SBB homepage
-        return "Web root";
+        return "redirect:/question/list";
     }
 
     @RequestMapping("/sbb")

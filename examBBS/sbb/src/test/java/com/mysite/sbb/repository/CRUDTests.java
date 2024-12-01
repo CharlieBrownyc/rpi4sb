@@ -17,6 +17,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.mysite.sbb.entity.Question;
+import com.mysite.sbb.service.AnswerService;
+import com.mysite.sbb.service.QuestionService;
 
 @SpringBootTest
 class CRUDTests {
@@ -25,6 +27,12 @@ class CRUDTests {
     
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private AnswerService answerService;
 
     @Test
     void testDelete(){
@@ -192,6 +200,26 @@ class CRUDTests {
     }
     
     @Test
+    void testSaveDatas(){        
+        for (int i = 1; i <= 300; i++) {            
+            String subject = String.format("테스트 데이터:[%03d]", i);
+            String content = "내용무";
+            this.questionService.create(subject, content);
+        }
+    }
+
+    @Test
+    void testSaveAnswers(){
+        for (int i = 431; i<= 632; i++){
+            for (int j = 0; j< 3; j++){
+                String content = String.format("테스트 답변:[%03d]", i);
+                Question question = this.questionService.getQuestion(i);
+                this.answerService.create(question, content);
+            }            
+        }
+    }
+
+    @Test
     void testSave() {
         Question q1 = new Question();
         q1.setSubject(generateRandomString());
@@ -212,5 +240,14 @@ class CRUDTests {
     
     private String generateRandomString() {
         return UUID.randomUUID().toString().substring(0, 10);
+    }
+
+    private String generateRandomKoreanString(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            char koreanChar = (char) (0xAC00 + Math.random() * 11172);
+            sb.append(koreanChar);
+        }
+        return sb.toString();
     }
 }

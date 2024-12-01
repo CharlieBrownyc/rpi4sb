@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ class AnswerRepositoryTest {
         Optional<Question> oq = this.questionRepository.findById(5);
         assertTrue(oq.isPresent());
         Question q = oq.get();
-        List<Answer> answers = q.getAnswers();
+        List<Answer> answers = q.getAnswerList();
 
         logger.info("==================================================================testGetAnswerListByQuestionId(){");
         // org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.mysite.sbb.entity.Question.answers: could not initialize proxy - no Session
@@ -84,7 +85,7 @@ class AnswerRepositoryTest {
         Question savedQuestion = this.questionRepository.save(q);
         
         // Create multiple Answers for the Question
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             Answer a = new Answer();
             a.setContent(generateRandomString());
             a.setQuestion(savedQuestion);
@@ -109,6 +110,21 @@ class AnswerRepositoryTest {
     }
 
     @Test
+    void testSaveRandomAnswersToExist30Question(){                
+        List<Answer> answers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            for(int j=0; j < 5; j++){
+                Answer a = new Answer();
+                a.setContent(generateRandomKoreanString(7));
+                a.setQuestion(this.questionRepository.findById(i+1).get());
+                a.setCreateDate(LocalDateTime.now());
+                answers.add(a);
+            }
+        }
+        this.answerRepository.saveAll(answers);        
+    }
+
+    @Test
     void testCreateAnswer() {
         Optional<Question> oq = this.questionRepository.findById(5);
         assertTrue(oq.isPresent());
@@ -124,4 +140,14 @@ class AnswerRepositoryTest {
     private String generateRandomString() {
         return UUID.randomUUID().toString().substring(0, 10);
     }
+    
+    private String generateRandomKoreanString(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            char koreanChar = (char) (0xAC00 + Math.random() * 11172);
+            sb.append(koreanChar);
+        }
+        return sb.toString();
+    }
+
 }
