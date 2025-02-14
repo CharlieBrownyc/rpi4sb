@@ -38,11 +38,13 @@ spring:
         livereload:
             enabled: true
     thymeleaf:
-        cache: false
-        prefix: file:src/main/resources/templates/
+        prefix: classpath:templates/
+        suffix: .html
+        check-template-location: true
+        cache: false    
     web:
-        resources:
-            static-locations: file:src/main/resources/static/
+        resources:            
+            static-locations: classpath:/static/
     
 logging:    
     level:

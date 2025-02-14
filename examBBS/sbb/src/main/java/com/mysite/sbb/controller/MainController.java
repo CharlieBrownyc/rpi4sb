@@ -17,7 +17,7 @@ public class MainController {
     @ResponseBody
     public String index(){
         // Redirect to the SBB homepage
-        return "HI sbb welcome";
+        return "Hi sbb welcome";
     }
 
 }

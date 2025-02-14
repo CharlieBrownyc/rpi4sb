@@ -1,6 +1,8 @@
 package com.mysite.sbb.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 
 @RequestMapping("/question")
@@ -26,11 +27,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class QuestionController {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     private final QuestionService questionService;
     
     @RequestMapping("/list")
     // @ResponseBody
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        // log.debug("into list [/question/list/ -> question_list_list]");
         Page<Question> paging = this.questionService.getList(page);
         model.addAttribute("paging", paging);
         return "question_list";

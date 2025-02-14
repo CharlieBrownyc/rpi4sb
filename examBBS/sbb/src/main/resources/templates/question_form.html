@@ -10,6 +10,11 @@
             <div class="mb-3">
                 <label for="content" class="form-label">내용</label>
                 <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+                <!-- <textarea th:field="*{content}" class="form-control"
+                        name="editorTxt" id="editorTxt"
+                        rows="40" cols="10"
+                        placeholder="내용을 입력해주세요."
+                        style="width: 858px"></textarea> -->
             </div>
             <input type="submit" value="저장하기" class="btn btn-primary my-2">
             <a th:href="@{/question/list}" th:text="뒤로"></a>
