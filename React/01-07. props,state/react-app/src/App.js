@@ -44,36 +44,14 @@ function Article(props){
   )
 }
 
-function Create(props){
-  console.log('1 step');
-
-  return (
-    <article>
-      <h2>Create new article</h2>
-      <form onSubmit={event=>{
-        console.log('2 step');
-        event.preventDefault();
-        const title = event.target.title.value;
-        const body = event.target.body.value;
-        props.onCreate(title, body);
-      }}>
-        <p><input type="text" name="title" placeholder="Title"/></p>
-        <p><textarea name="body" placeholder="Body"></textarea></p>
-        <p><input type="submit" value='Create'></input></p>
-      </form>
-    </article>
-  )
-}
-
 function App() {
   const [mode, setMode] = useState('WELCOME');
   const [id, setId] = useState(null);
-  const [nextId, setNextId] = useState(4);
-  const [topics, setTopics] = useState([
+  const topics = [
     {id: 1, title: 'HTML', body: 'HTML is HyperText Markup Language'},
     {id: 2, title: 'CSS', body: 'CSS is Cascading Style Sheets'},
     {id: 3, title: 'JavaScript', body: 'JavaScript is a programming language'}
-  ]);
+  ]
   let content = null;
 
   if(mode === 'WELCOME') {
@@ -88,17 +66,6 @@ function App() {
       }
     }
     content = <Article title={title} body={body}></Article>
-  } else if(mode === 'CREATE') {
-    content = <Create onCreate={(_title, _body)=>{
-      console.log('3 step');
-      const newTopic = {id:nextId, title: _title, body: _body}
-      const newTopics = [...topics]
-      newTopics.push(newTopic);
-      setTopics(newTopics);
-      setMode('READ');
-      setId(nextId);
-      setNextId(nextId+1);
-    }}></Create>
   }
 
   return (
@@ -111,10 +78,6 @@ function App() {
         setId(_id);
       }}></Nav>
       {content}
-      <a href='/create/' onClick={event=>{
-        event.preventDefault();
-        setMode('CREATE');
-      }}>Create</a>
     </div>
   );
 }
