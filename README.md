@@ -2,7 +2,7 @@
 ```
 📦rpi4sb
  ┣ 📂examBBS
- ┣ 📂React
+ ┣ 📂react
  ┣ 📜.gitignore
  ┣ 📜LICENSE
  ┗ 📜README.md
