@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="question, loop : ${paging}">
+                <tr th:each="question, loop : ${paging}"> <!-- paging는 Page<Question> 타입, loop은 status 변수 -->
                     <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
                     <!-- <td th:text="${loop.odd}"></td> -->
                     <td>

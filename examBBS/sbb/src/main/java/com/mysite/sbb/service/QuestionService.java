@@ -23,13 +23,13 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
 
     public Page<Question> getList(int page){
-        List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return this.questionRepository.findAll(pageable);
+        List<Sort.Order> sorts = new ArrayList<>(); // Create a list to hold sorting orders
+        sorts.add(Sort.Order.desc("createDate")); // Add sorting by createDate in descending order
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // Create a Pageable object with the specified page number, size, and sorting
+        return this.questionRepository.findAll(pageable); // Retrieve a paginated list of questions sorted by createDate in descending order
     }
 
-    public List<Question> getList(){
+    public List<Question> getList(){ // Method to retrieve all questions without pagination
         return questionRepository.findAll();
     }
 

@@ -35,9 +35,9 @@ public class QuestionController {
     // @ResponseBody
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
         // log.debug("into list [/question/list/ -> question_list_list]");
-        Page<Question> paging = this.questionService.getList(page);
-        model.addAttribute("paging", paging);
-        return "question_list";
+        Page<Question> paging = this.questionService.getList(page); // Retrieve a paginated list of questions
+        model.addAttribute("paging", paging); // Add the paginated list to the model
+        return "question_list"; // Return the view name for displaying the list of questions
     }
 
     @RequestMapping(value = "/detail/{id}")
