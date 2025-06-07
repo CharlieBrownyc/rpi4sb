@@ -1,15 +1,13 @@
-package com.mysite.sbb;
+package com.example.threadex;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
-@EnableScheduling
 @SpringBootApplication
-public class SbbApplication {
+public class ThreadexApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SbbApplication.class, args);
+		SpringApplication.run(ThreadexApplication.class, args);
 	}
 
 }

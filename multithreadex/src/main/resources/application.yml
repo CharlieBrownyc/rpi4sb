@@ -1,0 +1,25 @@
+spring:
+    output:
+        ansi:
+            enabled: always
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    web:
+        resources:            
+            static-locations: classpath:/static/
+    thymeleaf:
+        prefix: classpath:templates/
+        suffix: .html
+        check-template-location: true
+        cache: false
+
+logging:
+    level:
+        com.example: DEBUG
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+server:
+    port: 8090

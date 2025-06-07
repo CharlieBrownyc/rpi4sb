@@ -1,0 +1,80 @@
+spring:
+    output:
+        ansi:
+            enabled: always
+    # h2:
+    #     console:
+    #         enabled: true
+    #         path: /h2-console
+    datasource:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        # # h2 ###################
+        # # driver-class-name: org.h2.Driver
+        # # url: jdbc:h2:~/local
+        # url: jdbc:log4jdbc:h2:~/local;DB_CLOSE_ON_EXIT=FALSE
+        # username: sa
+        # password: 
+        ## mysql ###################
+        # driver-class-name: com.mysql.cj.jdbc.Driver
+        # url: jdbc:mysql://localhost:3306/board?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+        url: jdbc:log4jdbc:mysql://localhost:3306/email?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
+        username: scott
+        password: tiger
+        hikari:            
+            connection-test-query: SELECT 1
+    jpa:        
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                # dialect: org.hibernate.dialect.H2Dialect
+                dialect: org.hibernate.dialect.MySQL8Dialect
+                "[show_sql]": true
+                "[format_sql]": true
+        show_sql: true
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    thymeleaf:
+        prefix: classpath:templates/
+        suffix: .html
+        check-template-location: true
+        cache: false    
+    web:
+        resources:            
+            static-locations: classpath:/static/
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: brownyc6@gmail.com
+        password: your_password_here
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+logging:    
+    level:
+        "[org.springframework.web]": INFO
+        "[org.hibernate.SQL]": INFO
+        "[com.mysite.sbb]": DEBUG
+        "[net.sf.log4jdbc]": DEBUG
+        com:
+            zaxxer:
+                hikari: INFO
+        javax:
+            sql:
+                DataSource: OFF
+        jdbc:
+            audit: OFF # JDBC 트러블슈팅 경우를 제외하고는 사용 권장 X
+            resultset: OFF # ResultSet을 포함한 모든 JDBC 호출 정보를 출력
+            resultsettable: INFO  #SQL 결과 데이터 Table형식으로 출력
+            sqlonly: OFF     #SQL만 로그만 출력
+            sqltiming: INFO    #SQL + 소요시간 출력
+            connection : OFF  # 커넥션 연결/종료 정보 출력
+server:
+    port: 8080

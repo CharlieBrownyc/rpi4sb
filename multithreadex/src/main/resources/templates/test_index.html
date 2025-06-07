@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <td>
+            <a th:href="@{|/test/thread?msg=hi${num}&num=${num}|}"
+                th:text="link"></a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
